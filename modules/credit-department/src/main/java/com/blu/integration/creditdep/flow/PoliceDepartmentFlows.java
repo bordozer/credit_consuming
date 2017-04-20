@@ -30,7 +30,7 @@ public class PoliceDepartmentFlows {
     public IntegrationFlow policeDepartmentFlow() {
         return IntegrationFlows
             .from(myChannels.policeChannel())
-            .log(Level.INFO, message -> "***** Validating client " + message.getPayload())
+            .log(Level.INFO, message -> "^^^^^ Validating client " + message.getPayload())
             .handle(policeDepartmentHandler())
             .get();
     }

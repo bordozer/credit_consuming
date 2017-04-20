@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.ExecutorChannel;
 import org.springframework.messaging.MessageChannel;
 
@@ -17,7 +18,7 @@ public class MyChannels {
 
     @Bean
     public MessageChannel policeChannel() {
-        return new ExecutorChannel(ioBoundExecutorService);
+        return new DirectChannel();
     }
 
     @Bean
