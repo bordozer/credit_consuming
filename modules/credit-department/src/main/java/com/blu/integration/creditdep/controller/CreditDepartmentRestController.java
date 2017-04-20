@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CoordinantoRestController {
+public class CreditDepartmentRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String healthCheck() {
-        return "I'm a Coordinanto, I'm OK";
+        return "I'm a Credit Department, I'm OK";
     }
 }
