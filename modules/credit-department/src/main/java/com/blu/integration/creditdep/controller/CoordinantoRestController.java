@@ -1,4 +1,4 @@
-package com.blu.integration.coordination.controller;
+package com.blu.integration.creditdep.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

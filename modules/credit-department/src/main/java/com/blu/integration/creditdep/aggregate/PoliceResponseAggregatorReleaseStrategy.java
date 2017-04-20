@@ -1,4 +1,4 @@
-package com.blu.integration.coordination.aggregate;
+package com.blu.integration.creditdep.aggregate;
 
 import org.springframework.integration.aggregator.ReleaseStrategy;
 import org.springframework.integration.store.MessageGroup;

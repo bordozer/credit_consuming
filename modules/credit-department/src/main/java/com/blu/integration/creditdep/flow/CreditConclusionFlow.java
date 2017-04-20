@@ -1,4 +1,4 @@
-package com.blu.integration.coordination.flow;
+package com.blu.integration.creditdep.flow;
 
 import static org.springframework.integration.http.HttpHeaders.STATUS_CODE;
 
@@ -12,8 +12,8 @@ import org.springframework.integration.handler.LoggingHandler.Level;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 
-import com.blu.integration.coordination.config.channel.MyChannels;
-import com.blu.integration.coordination.model.CreditConclusion;
+import com.blu.integration.creditdep.config.channel.MyChannels;
+import com.blu.integration.creditdep.model.CreditConclusion;
 
 import lombok.AllArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.blu.integration.coordination.model;
+package com.blu.integration.creditdep.model;
 
 public enum CreditConclusionAction {
     CREDIT_CONFIRMED,

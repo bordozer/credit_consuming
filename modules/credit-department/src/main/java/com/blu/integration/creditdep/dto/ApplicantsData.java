@@ -1,4 +1,4 @@
-package com.blu.integration.coordination.dto;
+package com.blu.integration.creditdep.dto;
 
 import com.blu.integration.model.Applicant;
 

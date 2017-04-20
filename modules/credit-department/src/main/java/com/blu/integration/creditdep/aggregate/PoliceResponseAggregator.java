@@ -1,4 +1,4 @@
-package com.blu.integration.coordination.aggregate;
+package com.blu.integration.creditdep.aggregate;
 
 import java.util.stream.Collectors;
 

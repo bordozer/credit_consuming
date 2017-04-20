@@ -1,6 +1,6 @@
 package com.blu.integration.model;
 
-public enum ClientoType {
+public enum ClientType {
     RESPECTABLE,
     CRIMINAL
 }

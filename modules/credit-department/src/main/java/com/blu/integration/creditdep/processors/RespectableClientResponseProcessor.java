@@ -1,8 +1,8 @@
-package com.blu.integration.coordination.processors;
+package com.blu.integration.creditdep.processors;
 
 import java.util.Map;
 
-import com.blu.integration.coordination.model.CreditConclusion;
+import com.blu.integration.creditdep.model.CreditConclusion;
 import com.blu.integration.model.PoliceResponse;
 
 import lombok.extern.slf4j.Slf4j;

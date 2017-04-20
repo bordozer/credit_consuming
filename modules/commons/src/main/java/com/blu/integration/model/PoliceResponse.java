@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PoliceResponse {
     private Applicant applicant;
-    private ClientoType clientoType;
+    private ClientType clientType;
 
     public static PoliceResponse respectable(final Applicant applicant) {
-        return new PoliceResponse(applicant, ClientoType.RESPECTABLE);
+        return new PoliceResponse(applicant, ClientType.RESPECTABLE);
     }
 
     public static PoliceResponse criminal(final Applicant applicant) {
-        return new PoliceResponse(applicant, ClientoType.CRIMINAL);
+        return new PoliceResponse(applicant, ClientType.CRIMINAL);
     }
 }

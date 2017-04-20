@@ -1,4 +1,4 @@
-package com.blu.integration.coordination.flow;
+package com.blu.integration.creditdep.flow;
 
 import java.util.List;
 
@@ -13,20 +13,19 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.http.Http;
 import org.springframework.integration.gateway.MessagingGatewaySupport;
-import org.springframework.integration.handler.LoggingHandler.Level;
 import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.Message;
 
-import com.blu.integration.coordination.aggregate.PoliceResponseAggregator;
-import com.blu.integration.coordination.aggregate.PoliceResponseAggregatorReleaseStrategy;
-import com.blu.integration.coordination.config.channel.MyChannels;
-import com.blu.integration.coordination.config.transform.ApplicantTransformer;
-import com.blu.integration.coordination.dto.ApplicantsData;
-import com.blu.integration.coordination.model.CreditConclusion;
-import com.blu.integration.coordination.model.CreditConclusionAction;
-import com.blu.integration.coordination.processors.CriminalClientResponseProcessor;
-import com.blu.integration.coordination.processors.PoliceResponseProcessor;
-import com.blu.integration.coordination.processors.RespectableClientResponseProcessor;
+import com.blu.integration.creditdep.aggregate.PoliceResponseAggregator;
+import com.blu.integration.creditdep.aggregate.PoliceResponseAggregatorReleaseStrategy;
+import com.blu.integration.creditdep.config.channel.MyChannels;
+import com.blu.integration.creditdep.config.transform.ApplicantTransformer;
+import com.blu.integration.creditdep.dto.ApplicantsData;
+import com.blu.integration.creditdep.model.CreditConclusion;
+import com.blu.integration.creditdep.model.CreditConclusionAction;
+import com.blu.integration.creditdep.processors.CriminalClientResponseProcessor;
+import com.blu.integration.creditdep.processors.PoliceResponseProcessor;
+import com.blu.integration.creditdep.processors.RespectableClientResponseProcessor;
 import com.blu.integration.model.Applicant;
 
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.blu.integration.coordination.flow;
+package com.blu.integration.creditdep.flow;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +11,7 @@ import org.springframework.integration.handler.LoggingHandler.Level;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.web.client.RestTemplate;
 
-import com.blu.integration.coordination.config.channel.MyChannels;
-import com.blu.integration.model.Applicant;
+import com.blu.integration.creditdep.config.channel.MyChannels;
 import com.blu.integration.model.PoliceResponse;
 
 import lombok.RequiredArgsConstructor;
@@ -24,21 +23,21 @@ public class PoliceFlows {
     private final MyChannels myChannels;
     private final RestTemplate restTemplate;
 
-    @Value("${cliento.url}")
-    private String clientoUrl;
+    @Value("${police.department.url}")
+    private String policeDepartmentUrl;
 
     @Bean
-    public IntegrationFlow clientoFlow() {
+    public IntegrationFlow policeDepartmentFlow() {
         return IntegrationFlows
             .from(myChannels.policeChannel())
-            .log(Level.INFO, message -> "***** Validating cliento " + message.getPayload())
-            .handle(clientoHandler())
+            .log(Level.INFO, message -> "***** Validating client " + message.getPayload())
+            .handle(policeDepartmentHandler())
             .get();
     }
 
     @Bean
-    MessageHandler clientoHandler() {
-        return Http.outboundGateway(clientoUrl, restTemplate)
+    MessageHandler policeDepartmentHandler() {
+        return Http.outboundGateway(policeDepartmentUrl, restTemplate)
             .expectedResponseType(PoliceResponse.class)
             .httpMethod(HttpMethod.POST)
             .get();

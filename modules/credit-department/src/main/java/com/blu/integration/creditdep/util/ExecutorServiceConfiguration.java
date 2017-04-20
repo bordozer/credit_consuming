@@ -1,4 +1,4 @@
-package com.blu.integration.coordination.util;
+package com.blu.integration.creditdep.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
