@@ -1,6 +1,6 @@
 package com.blu.integration.creditdep.config.transform;
 
-import static com.blu.integration.creditdep.flow.CoordinationFlows.HEADER_APPLICANT_TYPE;
+import static com.blu.integration.creditdep.flow.CreditDepartmentFlows.HEADER_APPLICANT_TYPE;
 
 import java.util.Arrays;
 import java.util.List;

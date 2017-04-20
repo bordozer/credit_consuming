@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
-public class CoordinationFlows {
+public class CreditDepartmentFlows {
 
     public static final String HEADER_APPLICANT_TYPE = "ApplicantType";
 
