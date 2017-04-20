@@ -26,7 +26,7 @@ public class PoliceRestController {
 
     @RequestMapping(method = RequestMethod.POST, value = "")
     public PoliceResponse getPoliceResponse(@RequestBody final Applicant applicant) {
-        log.info("***** Client validation request: {}", applicant);
+        log.info("----- Client validation request: {}", applicant);
         if (WANTED.contains(applicant.getName())) {
             return PoliceResponse.criminal(applicant);
         }
