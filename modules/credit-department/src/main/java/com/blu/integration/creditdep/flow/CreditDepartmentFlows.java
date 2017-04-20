@@ -56,11 +56,18 @@ public class CreditDepartmentFlows {
         return IntegrationFlows.from(inboundGateway())
             .transform(applicantTransformer())
             .split(spec -> spec.async(true))
-            .gateway(myChannels.policeChannel())
+            .scatterGather(scatter -> scatter
+                    .recipient(myChannels.policeChannel())
+                    .applySequence(true),
+                gather -> gather
+                    .releaseStrategy(policeResponseReleaseStrategy())
+                    .outputProcessor(policeMessagesAggregator())
+            )
+            /*.gateway(myChannels.policeChannel())
             .aggregate(aggregatorSpec -> aggregatorSpec
                 .releaseStrategy(policeResponseReleaseStrategy())
                 .outputProcessor(policeMessagesAggregator())
-            )
+            )*/
             .handle(policeResponseProcessorsChain())
             .<CreditConclusion, CreditConclusionAction>route(CreditConclusion::getCreditAction,
                 mapping -> mapping
