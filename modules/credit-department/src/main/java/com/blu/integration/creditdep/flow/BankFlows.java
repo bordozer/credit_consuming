@@ -52,7 +52,7 @@ public class BankFlows {
     }
 
     @Bean
-    public IntegrationFlow creditFlow() {
+    public IntegrationFlow bankFlow() {
         return IntegrationFlows.from(inboundGateway())
             .transform(applicantTransformer())
             .split(spec -> spec.async(true))
