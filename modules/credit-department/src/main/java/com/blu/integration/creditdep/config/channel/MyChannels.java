@@ -4,9 +4,7 @@ import java.util.concurrent.ExecutorService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.ExecutorChannel;
-import org.springframework.integration.channel.QueueChannel;
 import org.springframework.messaging.MessageChannel;
 
 import lombok.RequiredArgsConstructor;
