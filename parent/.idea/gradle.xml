@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/../modules/bank" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../build_tools/gradle-3.2.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../modules/bank" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/../modules/commons" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../build_tools/gradle-3.2.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../modules/commons" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/../modules/police" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../build_tools/gradle-3.2.1" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../modules/police" />
+          </set>
+        </option>
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../build_tools/gradle-3.5" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

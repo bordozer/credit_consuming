@@ -9,6 +9,6 @@ public class BankRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String healthCheck() {
-        return "I'm a Bank, I gives credits, I'm OK";
+        return "I'm a Bank, I give credits, I'm OK";
     }
 }

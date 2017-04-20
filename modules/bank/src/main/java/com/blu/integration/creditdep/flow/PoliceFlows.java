@@ -18,26 +18,30 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
-public class PoliceDepartmentFlows {
+public class PoliceFlows {
 
     private final MyChannels myChannels;
     private final RestTemplate restTemplate;
 
-    @Value("${police.department.url}")
-    private String policeDepartmentUrl;
+    @Value("${police.url}")
+    private String policeUrl;
 
     @Bean
-    public IntegrationFlow policeDepartmentFlow() {
+    public IntegrationFlow policeFlow() {
         return IntegrationFlows
             .from(myChannels.policeChannel())
             .log(Level.INFO, message -> "^^^^^ Validating client " + message.getPayload())
-            .handle(policeDepartmentHandler())
+            .handle(policeHandler())
+            /*.gateway(flow ->
+                flow.handle(policeHandler())
+                .log(Level.INFO, message -> "''''' Client has been validated: " + message.getPayload())
+            )*/
             .get();
     }
 
     @Bean
-    MessageHandler policeDepartmentHandler() {
-        return Http.outboundGateway(policeDepartmentUrl, restTemplate)
+    MessageHandler policeHandler() {
+        return Http.outboundGateway(policeUrl, restTemplate)
             .expectedResponseType(PoliceResponse.class)
             .httpMethod(HttpMethod.POST)
             .get();

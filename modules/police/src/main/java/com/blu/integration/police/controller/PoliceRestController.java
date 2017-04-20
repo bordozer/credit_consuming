@@ -21,7 +21,7 @@ public class PoliceRestController {
 
     @RequestMapping(method = RequestMethod.GET, value = "")
     public String healthCheck() {
-        return "I'm a Police Department, I checks bank's clients for a criminal background I'm OK";
+        return "I'm a Police, I check bank's clients for a criminal background I'm OK";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "")
