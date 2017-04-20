@@ -30,7 +30,7 @@ dependencies {
 	compile group: 'org.springframework.integration', name: 'spring-integration-http', version: '4.3.8.RELEASE'
 	compile group: 'org.springframework.integration', name: 'spring-integration-java-dsl', version: '1.2.1.RELEASE'
 	compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0.1'
-	compile group: 'com.blu.credit.conclusion', name: 'model', version: '0.0.1-SNAPSHOT'
+	compile group: 'com.blu.credit.conclusion', name: 'commons', version: '0.0.1-SNAPSHOT'
 
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
