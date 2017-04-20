@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.ExecutorChannel;
+import org.springframework.integration.channel.QueueChannel;
 import org.springframework.messaging.MessageChannel;
 
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class MyChannels {
 
     @Bean
     public MessageChannel policeChannel() {
-        return new DirectChannel();
+        return new ExecutorChannel(ioBoundExecutorService);
     }
 
     @Bean
