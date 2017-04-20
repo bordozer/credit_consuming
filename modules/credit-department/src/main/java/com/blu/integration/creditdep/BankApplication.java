@@ -7,10 +7,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class CreditDepartmentApplication {
+public class BankApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CreditDepartmentApplication.class, args);
+		SpringApplication.run(BankApplication.class, args);
 	}
 
 	@Bean
