@@ -47,7 +47,7 @@ public class CreditConclusionFlow {
                 MessageBuilder
                     .withPayload(payload)
                     .copyHeaders(headers)
-                    .setHeader(STATUS_CODE, HttpServletResponse.SC_OK)
+                    .setHeader(STATUS_CODE, HttpServletResponse.SC_BAD_REQUEST)
             )
             .get();
     }
