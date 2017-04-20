@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
-public class PoliceFlows {
+public class PoliceDepartmentFlows {
 
     private final MyChannels myChannels;
     private final RestTemplate restTemplate;
