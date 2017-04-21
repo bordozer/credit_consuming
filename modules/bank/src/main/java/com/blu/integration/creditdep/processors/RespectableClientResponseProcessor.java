@@ -2,6 +2,8 @@ package com.blu.integration.creditdep.processors;
 
 import java.util.Map;
 
+import org.springframework.util.Assert;
+
 import com.blu.integration.creditdep.model.CreditConclusion;
 import com.blu.integration.model.PoliceResponse;
 
@@ -12,7 +14,7 @@ public class RespectableClientResponseProcessor implements PoliceResponseProcess
 
     @Override
     public CreditConclusion process(final Map<String, PoliceResponse> response) {
-        assert response.size() > 0 : "No police response! It must be a holiday there...";
+        Assert.isTrue(response.size() > 0, "No police response! It must be a holiday there...");
         return CreditConclusion.loan(response.entrySet().iterator().next().getValue().getApplicant());
     }
 }
