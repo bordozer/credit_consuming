@@ -30,12 +30,8 @@ public class PoliceFlows {
     public IntegrationFlow policeFlow() {
         return IntegrationFlows
             .from(myChannels.policeChannel())
-            .log(Level.INFO, message -> "^^^^^ Validating client " + message.getPayload())
+            .log(Level.INFO, message -> "^^^^^ Getting info from police about " + message.getPayload())
             .handle(policeHandler())
-            /*.gateway(flow ->
-                flow.handle(policeHandler())
-                .log(Level.INFO, message -> "''''' Client has been validated: " + message.getPayload())
-            )*/
             .get();
     }
 

@@ -12,6 +12,7 @@ public class RespectableClientResponseProcessor implements PoliceResponseProcess
 
     @Override
     public CreditConclusion process(final Map<String, PoliceResponse> response) {
+        assert response.size() > 0 : "No police response! It must be a holiday there...";
         return CreditConclusion.loan(response.entrySet().iterator().next().getValue().getApplicant());
     }
 }
