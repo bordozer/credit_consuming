@@ -17,7 +17,7 @@ public class CriminalClientResponseProcessor implements PoliceResponseProcessor 
 
     @Override
     public CreditConclusion process(final Map<String, PoliceResponse> response) {
-        assert response.size() > 0 : "No police response! It must be a holiday there...";
+        assert response.size() == 0 : "No police response! It must be a holiday there...";
         return response.values().stream()
             .filter(resp -> ClientType.CRIMINAL.equals(resp.getClientType()))
             .findAny()
