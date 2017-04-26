@@ -18,6 +18,7 @@ import org.springframework.messaging.Message;
 
 import com.blu.integration.creditdep.aggregate.PoliceResponseAggregator;
 import com.blu.integration.creditdep.aggregate.PoliceResponseAggregatorReleaseStrategy;
+import com.blu.integration.creditdep.config.ExecutorServiceConfiguration;
 import com.blu.integration.creditdep.config.channel.MyChannels;
 import com.blu.integration.creditdep.config.transform.ApplicantTransformer;
 import com.blu.integration.creditdep.dto.ApplicantsData;
@@ -39,6 +40,7 @@ public class BankFlows {
     public static final String HEADER_APPLICANT_TYPE = "ApplicantType";
 
     private final MyChannels myChannels;
+    private final ExecutorServiceConfiguration executorServices;
 
     @Bean
     MessagingGatewaySupport inboundGateway() {
@@ -56,18 +58,12 @@ public class BankFlows {
         return IntegrationFlows.from(inboundGateway())
             .transform(applicantTransformer())
             .split(spec -> spec.async(true))
-            .scatterGather(scatter -> scatter
-                    .recipient(myChannels.policeChannel())
-                    .applySequence(true),
-                gather -> gather
-                    .releaseStrategy(policeResponseReleaseStrategy())
-                    .outputProcessor(policeMessagesAggregator())
-            )
-            /*.gateway(myChannels.policeChannel())
+            .channel(channels -> channels.executor(executorServices.applicantExecutorService()))
+            .gateway(myChannels.policeChannel())
             .aggregate(aggregatorSpec -> aggregatorSpec
                 .releaseStrategy(policeResponseReleaseStrategy())
                 .outputProcessor(policeMessagesAggregator())
-            )*/
+            )
             .handle(policeResponseProcessorsChain())
             .<CreditConclusion, CreditConclusionAction>route(CreditConclusion::getCreditAction,
                 mapping -> mapping
