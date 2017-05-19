@@ -26,9 +26,9 @@ public class BankServiceImpl implements BankService {
     private final PoliceService policeService;
 
     @Override
-    public Mono<CreditConclusion> process(final ApplicantsData applicants) {
-        log.info("***** Credit inquiry {}", applicants);
-        return Flux.concat(getApplicantPromises(applicants))
+    public Mono<CreditConclusion> process(final ApplicantsData applicantsData) {
+        log.info("***** Credit inquiry {}", applicantsData);
+        return Flux.concat(getApplicantPromises(applicantsData))
             .collectList()
             .then(this::processPositivePoliceResponses)
             .onErrorResume(e -> {
@@ -40,11 +40,11 @@ public class BankServiceImpl implements BankService {
             });
     }
 
-    private List<Mono<PoliceResponse>> getApplicantPromises(final ApplicantsData applicants) {
-        final Applicant applicant = applicants.getApplicant();
+    private List<Mono<PoliceResponse>> getApplicantPromises(final ApplicantsData applicantsData) {
+        final Applicant applicant = applicantsData.getApplicant();
         Assert.notNull(applicant, "Applicant cannot be null");
 
-        final Applicant coApplicant = applicants.getCoApplicant();
+        final Applicant coApplicant = applicantsData.getCoApplicant();
 
         if (coApplicant == null) {
             return Collections.singletonList(getPoliceResponsePromise(applicant));
