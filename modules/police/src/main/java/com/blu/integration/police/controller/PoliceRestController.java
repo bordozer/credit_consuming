@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class PoliceRestController {
 
-    private static final List<String> WANTED = Arrays.asList("Julico Banditto", "Ben Laden");
+    private static final List<String> WANTED = Arrays.asList("Julico Banditto", "Ben Laden", "Axl Rose");
 
     @RequestMapping(method = RequestMethod.GET, value = "")
     public String healthCheck() {
