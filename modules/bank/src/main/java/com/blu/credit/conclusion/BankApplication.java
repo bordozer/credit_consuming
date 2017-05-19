@@ -1,4 +1,4 @@
-package com.blu.integration.creditdep;
+package com.blu.credit.conclusion;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

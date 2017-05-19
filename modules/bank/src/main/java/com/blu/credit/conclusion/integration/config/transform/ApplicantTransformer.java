@@ -1,6 +1,6 @@
-package com.blu.integration.creditdep.config.transform;
+package com.blu.credit.conclusion.integration.config.transform;
 
-import static com.blu.integration.creditdep.flow.BankFlows.HEADER_APPLICANT_TYPE;
+import static com.blu.credit.conclusion.integration.flow.BankFlows.HEADER_APPLICANT_TYPE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.Message;
 
-import com.blu.integration.creditdep.dto.ApplicantsData;
+import com.blu.credit.conclusion.dto.ApplicantsData;
 import com.blu.integration.model.Applicant;
 
 import lombok.extern.slf4j.Slf4j;

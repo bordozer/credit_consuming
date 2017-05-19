@@ -1,4 +1,4 @@
-package com.blu.integration.creditdep.flow;
+package com.blu.credit.conclusion.integration.flow;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ import org.springframework.integration.handler.LoggingHandler.Level;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.web.client.RestTemplate;
 
-import com.blu.integration.creditdep.config.channel.MyChannels;
+import com.blu.credit.conclusion.integration.config.channel.MyChannels;
 import com.blu.integration.model.PoliceResponse;
 
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.blu.integration.creditdep.flow;
+package com.blu.credit.conclusion.integration.flow;
 
 import java.util.List;
 
@@ -16,17 +16,17 @@ import org.springframework.integration.gateway.MessagingGatewaySupport;
 import org.springframework.integration.transformer.GenericTransformer;
 import org.springframework.messaging.Message;
 
-import com.blu.integration.creditdep.aggregate.PoliceResponseAggregator;
-import com.blu.integration.creditdep.aggregate.PoliceResponseAggregatorReleaseStrategy;
-import com.blu.integration.creditdep.config.ExecutorServiceConfiguration;
-import com.blu.integration.creditdep.config.channel.MyChannels;
-import com.blu.integration.creditdep.config.transform.ApplicantTransformer;
-import com.blu.integration.creditdep.dto.ApplicantsData;
-import com.blu.integration.creditdep.model.CreditConclusion;
-import com.blu.integration.creditdep.model.CreditConclusionAction;
-import com.blu.integration.creditdep.processors.CriminalClientResponseProcessor;
-import com.blu.integration.creditdep.processors.PoliceResponseProcessor;
-import com.blu.integration.creditdep.processors.RespectableClientResponseProcessor;
+import com.blu.credit.conclusion.integration.aggregate.PoliceResponseAggregator;
+import com.blu.credit.conclusion.integration.aggregate.PoliceResponseAggregatorReleaseStrategy;
+import com.blu.credit.conclusion.integration.config.ExecutorServiceConfiguration;
+import com.blu.credit.conclusion.integration.config.channel.MyChannels;
+import com.blu.credit.conclusion.integration.config.transform.ApplicantTransformer;
+import com.blu.credit.conclusion.dto.ApplicantsData;
+import com.blu.credit.conclusion.model.CreditConclusion;
+import com.blu.credit.conclusion.model.CreditConclusionAction;
+import com.blu.credit.conclusion.integration.processors.CriminalClientResponseProcessor;
+import com.blu.credit.conclusion.integration.processors.PoliceResponseProcessor;
+import com.blu.credit.conclusion.integration.processors.RespectableClientResponseProcessor;
 import com.blu.integration.model.Applicant;
 
 import lombok.RequiredArgsConstructor;

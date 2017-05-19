@@ -1,8 +1,8 @@
-package com.blu.integration.creditdep.processors;
+package com.blu.credit.conclusion.integration.processors;
 
 import java.util.Map;
 
-import com.blu.integration.creditdep.model.CreditConclusion;
+import com.blu.credit.conclusion.model.CreditConclusion;
 import com.blu.integration.model.PoliceResponse;
 
 public interface PoliceResponseProcessor {

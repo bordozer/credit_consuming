@@ -1,10 +1,10 @@
-package com.blu.integration.creditdep.processors;
+package com.blu.credit.conclusion.integration.processors;
 
 import java.util.Map;
 
 import org.springframework.util.Assert;
 
-import com.blu.integration.creditdep.model.CreditConclusion;
+import com.blu.credit.conclusion.model.CreditConclusion;
 import com.blu.integration.model.PoliceResponse;
 
 import lombok.extern.slf4j.Slf4j;

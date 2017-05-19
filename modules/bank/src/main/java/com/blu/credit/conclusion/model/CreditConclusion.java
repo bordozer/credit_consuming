@@ -1,4 +1,4 @@
-package com.blu.integration.creditdep.model;
+package com.blu.credit.conclusion.model;
 
 import com.blu.integration.model.Applicant;
 

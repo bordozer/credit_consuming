@@ -1,4 +1,4 @@
-package com.blu.integration.creditdep.config.channel;
+package com.blu.credit.conclusion.integration.config.channel;
 
 import java.util.concurrent.ExecutorService;
 
