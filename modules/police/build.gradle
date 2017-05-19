@@ -29,4 +29,5 @@ dependencies {
 	compile group: 'com.blu.credit.conclusion', name: 'commons', version: '0.0.1-SNAPSHOT'
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile "com.github.tomakehurst:wiremock-standalone:2.6.0"
 }
