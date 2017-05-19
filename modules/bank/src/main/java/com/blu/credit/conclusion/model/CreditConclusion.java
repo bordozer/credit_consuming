@@ -20,7 +20,7 @@ public class CreditConclusion {
     }
 
     public static CreditConclusion refuse(Applicant applicant) {
-        log.info("***** {} is a respectable client. Loan application is refused", applicant);
+        log.error("***** {} is a criminal. Loan application is refused", applicant);
         return new CreditConclusion(applicant, CreditConclusionAction.REFUSE);
     }
 }

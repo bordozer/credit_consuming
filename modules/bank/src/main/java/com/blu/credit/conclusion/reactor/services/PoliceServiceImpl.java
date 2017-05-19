@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.blu.credit.conclusion.reactor.exception.ApplicantIsCriminalException;
 import com.blu.integration.model.Applicant;
 import com.blu.integration.model.ClientType;
 import com.blu.integration.model.PoliceResponse;
@@ -25,7 +26,7 @@ public class PoliceServiceImpl implements PoliceService {
     @Override
     public Mono<PoliceResponse> process(final Applicant applicant) {
         if (applicant == null) {
-            log.info("***** Applicant is null");
+            log.info("***** Applicant is null. Do not disturb the Police for nothing.");
             return Mono.empty();
         }
         return Mono.fromCallable(() -> getPoliceResponse(applicant));
@@ -34,13 +35,13 @@ public class PoliceServiceImpl implements PoliceService {
     private PoliceResponse getPoliceResponse(final Applicant applicant) {
         final PoliceResponse policeResponse = doPoliceResponse(applicant);
         if (ClientType.CRIMINAL.equals(policeResponse.getClientType())) {
-            return PoliceResponse.criminal(applicant);
+            throw new ApplicantIsCriminalException(applicant);
         }
         return PoliceResponse.respectable(applicant);
     }
 
     private PoliceResponse doPoliceResponse(final Applicant applicant) {
-        log.info("**** Sending request to police about applicant {}", applicant);
+        log.info("***** Sending request to police about applicant {}", applicant);
         return restTemplate.postForObject(policeUrl, applicant, PoliceResponse.class);
     }
 }

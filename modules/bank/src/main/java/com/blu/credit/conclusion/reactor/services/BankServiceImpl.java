@@ -7,8 +7,8 @@ import org.springframework.util.Assert;
 
 import com.blu.credit.conclusion.dto.ApplicantsData;
 import com.blu.credit.conclusion.model.CreditConclusion;
+import com.blu.credit.conclusion.reactor.exception.ApplicantIsCriminalException;
 import com.blu.integration.model.Applicant;
-import com.blu.integration.model.ClientType;
 import com.blu.integration.model.PoliceResponse;
 
 import lombok.RequiredArgsConstructor;
@@ -37,26 +37,23 @@ public class BankServiceImpl implements BankService {
 
         return Flux.concat(applicantPoliceResponsePromise, coApplicantPoliceResponsePromise)
             .collectList()
-            .then(this::processPoliceResponses);
+            .then(this::processPositivePoliceResponses)
+            .onErrorResume(e -> {
+                if (e instanceof ApplicantIsCriminalException) {
+                    final Applicant criminal = ((ApplicantIsCriminalException) e).getApplicant();
+                    return processNegativePoliceResponses(criminal);
+                }
+                throw new RuntimeException("Something went wrong...");
+            });
     }
 
-    private Mono<CreditConclusion> processPoliceResponses(final List<PoliceResponse> policeResponses) {
-        if (policeResponses.size() > 1) {
-            final PoliceResponse coApplicantPoliceResponse = policeResponses.get(1);
-            if (isCriminal(coApplicantPoliceResponse)) {
-                return refuseLoan(coApplicantPoliceResponse.getApplicant());
-            }
-        }
-
-        final PoliceResponse applicantPoliceResponse = policeResponses.get(0);
-        if (isCriminal(applicantPoliceResponse)) {
-            return refuseLoan(applicantPoliceResponse.getApplicant());
-        }
-        return confirmLoan(applicantPoliceResponse.getApplicant());
+    private Mono<CreditConclusion> processPositivePoliceResponses(final List<PoliceResponse> policeResponses) {
+        final Applicant applicant = policeResponses.get(0).getApplicant();
+        return confirmLoan(applicant);
     }
 
-    private boolean isCriminal(final PoliceResponse coApplicantPoliceResponse) {
-        return ClientType.CRIMINAL.equals(coApplicantPoliceResponse.getClientType());
+    private Mono<? extends CreditConclusion> processNegativePoliceResponses(final Applicant criminal) {
+        return refuseLoan(criminal);
     }
 
     private Mono<CreditConclusion> confirmLoan(final Applicant applicant) {
