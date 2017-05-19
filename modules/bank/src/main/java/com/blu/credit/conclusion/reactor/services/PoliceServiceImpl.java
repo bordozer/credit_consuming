@@ -25,6 +25,7 @@ public class PoliceServiceImpl implements PoliceService {
     @Override
     public Mono<PoliceResponse> process(final Applicant applicant) {
         if (applicant == null) {
+            log.info("***** Applicant is null");
             return Mono.empty();
         }
         return Mono.fromCallable(() -> getPoliceResponse(applicant));
@@ -39,6 +40,7 @@ public class PoliceServiceImpl implements PoliceService {
     }
 
     private PoliceResponse doPoliceResponse(final Applicant applicant) {
+        log.info("**** Sending request to police about applicant {}", applicant);
         return restTemplate.postForObject(policeUrl, applicant, PoliceResponse.class);
     }
 }
