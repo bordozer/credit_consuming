@@ -1,6 +1,7 @@
 package com.blu.credit.conclusion.reactor.services;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.blu.credit.conclusion.dto.ApplicantsData;
 import com.blu.credit.conclusion.model.CreditConclusion;
@@ -25,6 +26,8 @@ public class BankServiceImpl implements BankService {
         log.info("***** Inquery {}", applicants);
 
         final Applicant applicant = applicants.getApplicant();
+        Assert.notNull(applicant, "Applicant cannot be null");
+
         final Applicant coApplicant = applicants.getCoApplicant();
 
         final Mono<PoliceResponse> applicantPoliceResponsePromise = getPoliceResponse(applicant);
@@ -33,18 +36,24 @@ public class BankServiceImpl implements BankService {
         return Flux.concat(applicantPoliceResponsePromise, coApplicantPoliceResponsePromise)
             .collectList()
             .then(policeResponses -> {
-                final PoliceResponse applicantPoliceResponse = policeResponses.get(0);
-                final PoliceResponse coApplicantPoliceResponse = policeResponses.get(1);
 
-                if (ClientType.CRIMINAL.equals(applicantPoliceResponse.getClientType())) {
-                    return refuseLoan(applicant);
+                if (policeResponses.size() > 1) {
+                    final PoliceResponse coApplicantPoliceResponse = policeResponses.get(1);
+                    if (isCriminal(coApplicantPoliceResponse)) {
+                        return refuseLoan(coApplicant);
+                    }
                 }
 
-                if (ClientType.CRIMINAL.equals(coApplicantPoliceResponse.getClientType())) {
-                    return refuseLoan(coApplicant);
+                final PoliceResponse applicantPoliceResponse = policeResponses.get(0);
+                if (isCriminal(applicantPoliceResponse)) {
+                    return refuseLoan(applicant);
                 }
                 return confirmLoan(applicant);
             });
+    }
+
+    private boolean isCriminal(final PoliceResponse coApplicantPoliceResponse) {
+        return ClientType.CRIMINAL.equals(coApplicantPoliceResponse.getClientType());
     }
 
     private Mono<CreditConclusion> confirmLoan(final Applicant applicant) {

@@ -24,6 +24,9 @@ public class PoliceServiceImpl implements PoliceService {
 
     @Override
     public Mono<PoliceResponse> process(final Applicant applicant) {
+        if (applicant == null) {
+            return Mono.empty();
+        }
         return Mono.fromCallable(() -> getPoliceResponse(applicant));
     }
 
