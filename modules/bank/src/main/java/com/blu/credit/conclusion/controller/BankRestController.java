@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blu.credit.conclusion.dto.ApplicantsData;
 import com.blu.credit.conclusion.model.CreditConclusion;
-import com.blu.credit.conclusion.reactor.services.BankFlowService;
+import com.blu.credit.conclusion.reactor.services.BankService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BankRestController {
 
-    private final BankFlowService bankFlowService;
+    private final BankService bankService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
     public String healthCheck() {
@@ -24,6 +24,6 @@ public class BankRestController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/react")
     public CreditConclusion getCreditConclusion(@RequestBody final ApplicantsData applicants) {
-        return bankFlowService.getCreditConclusion(applicants).block();
+        return bankService.process(applicants).block();
     }
 }

@@ -5,7 +5,7 @@ import com.blu.credit.conclusion.model.CreditConclusion;
 
 import reactor.core.publisher.Mono;
 
-public interface BankFlowService {
+public interface BankService {
 
-    Mono<CreditConclusion> getCreditConclusion(ApplicantsData applicants);
+    Mono<CreditConclusion> process(ApplicantsData applicants);
 }
