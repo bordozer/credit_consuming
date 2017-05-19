@@ -1,5 +1,7 @@
 package com.blu.credit.conclusion.reactor.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -35,21 +37,22 @@ public class BankServiceImpl implements BankService {
 
         return Flux.concat(applicantPoliceResponsePromise, coApplicantPoliceResponsePromise)
             .collectList()
-            .then(policeResponses -> {
+            .then(this::processPoliceResponses);
+    }
 
-                if (policeResponses.size() > 1) {
-                    final PoliceResponse coApplicantPoliceResponse = policeResponses.get(1);
-                    if (isCriminal(coApplicantPoliceResponse)) {
-                        return refuseLoan(coApplicant);
-                    }
-                }
+    private Mono<CreditConclusion> processPoliceResponses(final List<PoliceResponse> policeResponses) {
+        if (policeResponses.size() > 1) {
+            final PoliceResponse coApplicantPoliceResponse = policeResponses.get(1);
+            if (isCriminal(coApplicantPoliceResponse)) {
+                return refuseLoan(coApplicantPoliceResponse.getApplicant());
+            }
+        }
 
-                final PoliceResponse applicantPoliceResponse = policeResponses.get(0);
-                if (isCriminal(applicantPoliceResponse)) {
-                    return refuseLoan(applicant);
-                }
-                return confirmLoan(applicant);
-            });
+        final PoliceResponse applicantPoliceResponse = policeResponses.get(0);
+        if (isCriminal(applicantPoliceResponse)) {
+            return refuseLoan(applicantPoliceResponse.getApplicant());
+        }
+        return confirmLoan(applicantPoliceResponse.getApplicant());
     }
 
     private boolean isCriminal(final PoliceResponse coApplicantPoliceResponse) {
