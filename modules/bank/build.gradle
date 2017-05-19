@@ -34,6 +34,9 @@ dependencies {
 	compile group: 'io.reactivex', name: 'rxjava-reactive-streams', version: '1.2.1'
 
 	compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0.1'
+	compile group: 'com.google.guava', name: 'guava', version: '21.0'
+
+
 	compile group: 'com.blu.credit.conclusion', name: 'commons', version: '0.0.1-SNAPSHOT'
 
 	compileOnly('org.projectlombok:lombok')

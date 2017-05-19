@@ -1,5 +1,6 @@
 package com.blu.credit.conclusion.reactor.services;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.blu.credit.conclusion.model.CreditConclusion;
 import com.blu.credit.conclusion.reactor.exception.ApplicantIsCriminalException;
 import com.blu.integration.model.Applicant;
 import com.blu.integration.model.PoliceResponse;
+import com.google.common.collect.ImmutableList;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,16 +28,7 @@ public class BankServiceImpl implements BankService {
     @Override
     public Mono<CreditConclusion> process(final ApplicantsData applicants) {
         log.info("***** Credit inquiry {}", applicants);
-
-        final Applicant applicant = applicants.getApplicant();
-        Assert.notNull(applicant, "Applicant cannot be null");
-
-        final Applicant coApplicant = applicants.getCoApplicant();
-
-        final Mono<PoliceResponse> applicantPoliceResponsePromise = getPoliceResponsePromise(applicant);
-        final Mono<PoliceResponse> coApplicantPoliceResponsePromise = getPoliceResponsePromise(coApplicant);
-
-        return Flux.concat(applicantPoliceResponsePromise, coApplicantPoliceResponsePromise)
+        return Flux.concat(getApplicantPromises(applicants))
             .collectList()
             .then(this::processPositivePoliceResponses)
             .onErrorResume(e -> {
@@ -45,6 +38,19 @@ public class BankServiceImpl implements BankService {
                 }
                 throw new RuntimeException("Something went wrong...");
             });
+    }
+
+    private List<Mono<PoliceResponse>> getApplicantPromises(final ApplicantsData applicants) {
+        final Applicant applicant = applicants.getApplicant();
+        Assert.notNull(applicant, "Applicant cannot be null");
+
+        final Applicant coApplicant = applicants.getCoApplicant();
+
+        if (coApplicant == null) {
+            return Collections.singletonList(getPoliceResponsePromise(applicant));
+        }
+
+        return ImmutableList.of(getPoliceResponsePromise(applicant), getPoliceResponsePromise(coApplicant));
     }
 
     private Mono<CreditConclusion> processPositivePoliceResponses(final List<PoliceResponse> policeResponses) {
