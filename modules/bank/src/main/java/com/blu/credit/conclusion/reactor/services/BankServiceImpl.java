@@ -25,15 +25,15 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public Mono<CreditConclusion> process(final ApplicantsData applicants) {
-        log.info("***** Inquery {}", applicants);
+        log.info("***** Credit inquiry {}", applicants);
 
         final Applicant applicant = applicants.getApplicant();
         Assert.notNull(applicant, "Applicant cannot be null");
 
         final Applicant coApplicant = applicants.getCoApplicant();
 
-        final Mono<PoliceResponse> applicantPoliceResponsePromise = getPoliceResponse(applicant);
-        final Mono<PoliceResponse> coApplicantPoliceResponsePromise = getPoliceResponse(coApplicant);
+        final Mono<PoliceResponse> applicantPoliceResponsePromise = getPoliceResponsePromise(applicant);
+        final Mono<PoliceResponse> coApplicantPoliceResponsePromise = getPoliceResponsePromise(coApplicant);
 
         return Flux.concat(applicantPoliceResponsePromise, coApplicantPoliceResponsePromise)
             .collectList()
@@ -49,22 +49,14 @@ public class BankServiceImpl implements BankService {
 
     private Mono<CreditConclusion> processPositivePoliceResponses(final List<PoliceResponse> policeResponses) {
         final Applicant applicant = policeResponses.get(0).getApplicant();
-        return confirmLoan(applicant);
-    }
-
-    private Mono<? extends CreditConclusion> processNegativePoliceResponses(final Applicant criminal) {
-        return refuseLoan(criminal);
-    }
-
-    private Mono<CreditConclusion> confirmLoan(final Applicant applicant) {
         return Mono.just(CreditConclusion.loan(applicant));
     }
 
-    private Mono<CreditConclusion> refuseLoan(final Applicant applicant) {
-        return Mono.just(CreditConclusion.refuse(applicant));
+    private Mono<? extends CreditConclusion> processNegativePoliceResponses(final Applicant criminal) {
+        return Mono.just(CreditConclusion.refuse(criminal));
     }
 
-    private Mono<PoliceResponse> getPoliceResponse(final Applicant applicant) {
+    private Mono<PoliceResponse> getPoliceResponsePromise(final Applicant applicant) {
         return policeService.process(applicant);
     }
 }
