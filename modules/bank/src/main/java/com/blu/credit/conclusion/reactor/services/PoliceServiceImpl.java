@@ -24,14 +24,18 @@ public class PoliceServiceImpl implements PoliceService {
 
     @Override
     public Mono<PoliceResponse> process(final Applicant applicant) {
-        return Mono.fromCallable(() -> buildPoliceResponse(applicant));
+        return Mono.fromCallable(() -> getPoliceResponse(applicant));
     }
 
-    private PoliceResponse buildPoliceResponse(final Applicant applicant) {
-        final PoliceResponse policeResponse = restTemplate.postForObject(policeUrl, applicant, PoliceResponse.class);
+    private PoliceResponse getPoliceResponse(final Applicant applicant) {
+        final PoliceResponse policeResponse = doPoliceResponse(applicant);
         if (ClientType.CRIMINAL.equals(policeResponse.getClientType())) {
             return PoliceResponse.criminal(applicant);
         }
         return PoliceResponse.respectable(applicant);
+    }
+
+    private PoliceResponse doPoliceResponse(final Applicant applicant) {
+        return restTemplate.postForObject(policeUrl, applicant, PoliceResponse.class);
     }
 }
