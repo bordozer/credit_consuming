@@ -24,6 +24,6 @@ public class BankRestController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/react")
     public CreditConclusion getCreditConclusion(@RequestBody final ApplicantsData applicants) {
-        return bankFlowService.getCreditConclusion(applicants);
+        return bankFlowService.getCreditConclusion(applicants).block();
     }
 }

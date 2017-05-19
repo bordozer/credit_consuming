@@ -15,12 +15,12 @@ public class CreditConclusion {
     private final CreditConclusionAction creditAction;
 
     public static CreditConclusion loan(Applicant applicant) {
-        log.info("***** {} is a respectable client. Loan application satisfied", applicant);
+        log.info("***** {} is a respectable client. Loan application is satisfied", applicant);
         return new CreditConclusion(applicant, CreditConclusionAction.CREDIT_CONFIRMED);
     }
 
     public static CreditConclusion refuse(Applicant applicant) {
-        log.info("***** {} is a respectable client. Loan application refused", applicant);
+        log.info("***** {} is a respectable client. Loan application is refused", applicant);
         return new CreditConclusion(applicant, CreditConclusionAction.REFUSE);
     }
 }
